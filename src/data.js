@@ -1,3 +1,12 @@
+import bsides2025Img1 from './assets/bsides-2025-1.png';
+import bsides2025Img2 from './assets/bsides-2025-2.png';
+import cybersciImg1 from './assets/cybersci-1.png';
+import cybersciImg2 from './assets/cybersci-2.png';
+import ieeexhtbCtfImg1 from './assets/ieeexhtb-ctf-1.png';
+import ieeexhtbCtfImg2 from './assets/ieeexhtb-ctf-2.png';
+import lockpickingImg1 from './assets/lockpicking-1.png';
+import lockpickingImg2 from './assets/lockpicking-2.png';
+
 // ── file content rendered inside file viewer windows ──
 export const fileContents = {
   about: {
@@ -135,8 +144,13 @@ export const fileContents = {
     html: `
       <h3 style="font-family:'PPEditorialOld-Italic',cursive;color:#7a3f60;font-size:22px;margin-bottom:5px;">✦ Cybersci</h3>
       <div style="text-align:center;color:#c4aeb8;font-size:10px;letter-spacing:3px;padding:2px 0;margin:3px 0;">✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦</div>
-      <p style="color:#8a7070;line-height:1.7;font-size:11px;">Cybersecurity-focused science and community activities, experiments, and practical learning highlights.</p>
-      <p style="color:#8a7070;line-height:1.7;font-size:11px;">This section can hold snapshots of hands-on security exploration and outcomes.</p>
+      <p style="color:#8a7070;line-height:1.7;font-size:11px;">I competed in the regional Cybersci competition in Ottawa after only two months of being involved in cybersecurity.</p>
+      <p style="color:#8a7070;line-height:1.7;font-size:11px;">I brought together a team of 10 people, we trained for about a month, and we finished 6th overall. For such a short prep window, I am proud of what we built as a team.</p>
+      <p style="font-size:11px;margin-top:8px;"><span style="color:#7a3f60;">highlights</span>&nbsp; <span style="color:#4a7a6a;">Ottawa regional · team of 10 · 6th place</span></p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px;">
+        <img src="${cybersciImg1}" alt="Cybersci team photo 1" style="width:100%;height:120px;object-fit:cover;border:1px solid #c4aeb8;background:#fff9fc;" />
+        <img src="${cybersciImg2}" alt="Cybersci team photo 2" style="width:100%;height:120px;object-fit:cover;border:1px solid #c4aeb8;background:#fff9fc;" />
+      </div>
     `,
   },
 
@@ -145,8 +159,13 @@ export const fileContents = {
     html: `
       <h3 style="font-family:'PPEditorialOld-Italic',cursive;color:#7a3f60;font-size:22px;margin-bottom:5px;">✦ IEEExHackTheBox CTF</h3>
       <div style="text-align:center;color:#c4aeb8;font-size:10px;letter-spacing:3px;padding:2px 0;margin:3px 0;">✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦</div>
-      <p style="color:#8a7070;line-height:1.7;font-size:11px;">Competition participation notes, challenge categories, and techniques applied during the CTF event.</p>
-      <p style="color:#8a7070;line-height:1.7;font-size:11px;">Use this page to summarize ranking context, key solves, and team experience.</p>
+      <p style="color:#8a7070;line-height:1.7;font-size:11px;">I co-hosted my first CTF with Daniel Kisenko in collaboration with IEEE uOttawa Student Branch and Hack The Box.</p>
+      <p style="color:#8a7070;line-height:1.7;font-size:11px;">The event came together through the hard work of Floyd Haynes and Joe Gallo, and we had 50+ participants show up to learn, compete, and challenge themselves in cybersecurity.</p>
+      <p style="color:#8a7070;line-height:1.7;font-size:11px;">Seeing that level of energy and engagement made me even more motivated to keep building community-focused security events.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px;">
+        <img src="${ieeexhtbCtfImg1}" alt="IEEE x Hack The Box CTF photo 1" style="width:100%;height:120px;object-fit:cover;border:1px solid #c4aeb8;background:#fff9fc;" />
+        <img src="${ieeexhtbCtfImg2}" alt="IEEE x Hack The Box CTF photo 2" style="width:100%;height:120px;object-fit:cover;border:1px solid #c4aeb8;background:#fff9fc;" />
+      </div>
     `,
   },
 
@@ -155,8 +174,13 @@ export const fileContents = {
     html: `
       <h3 style="font-family:'PPEditorialOld-Italic',cursive;color:#7a3f60;font-size:22px;margin-bottom:5px;">✦ Lockpicking workshop</h3>
       <div style="text-align:center;color:#c4aeb8;font-size:10px;letter-spacing:3px;padding:2px 0;margin:3px 0;">✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦</div>
-      <p style="color:#8a7070;line-height:1.7;font-size:11px;">Hands-on physical security workshop focused on lock mechanisms, bypass fundamentals, and responsible use.</p>
-      <p style="color:#8a7070;line-height:1.7;font-size:11px;">Good place to document lessons learned and practical demonstrations.</p>
+      <p style="color:#8a7070;line-height:1.7;font-size:11px;">I helped host a lock-picking workshop in partnership with TOOOL (The Open Organisation of Lockpickers).</p>
+      <p style="color:#8a7070;line-height:1.7;font-size:11px;">Huge thanks to Cameron and his team for teaching participants the mechanics, ethics, and fun behind lock-picking in a hands-on setting.</p>
+      <p style="color:#8a7070;line-height:1.7;font-size:11px;">The turnout and feedback were great, and we are planning more practical security workshops through IEEE uOttawa Student Branch.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px;">
+        <img src="${lockpickingImg1}" alt="Lockpicking workshop photo 1" style="width:100%;height:120px;object-fit:cover;border:1px solid #c4aeb8;background:#fff9fc;" />
+        <img src="${lockpickingImg2}" alt="Lockpicking workshop photo 2" style="width:100%;height:120px;object-fit:cover;border:1px solid #c4aeb8;background:#fff9fc;" />
+      </div>
     `,
   },
 
@@ -165,8 +189,13 @@ export const fileContents = {
     html: `
       <h3 style="font-family:'PPEditorialOld-Italic',cursive;color:#7a3f60;font-size:22px;margin-bottom:5px;">✦ Bsides 2025</h3>
       <div style="text-align:center;color:#c4aeb8;font-size:10px;letter-spacing:3px;padding:2px 0;margin:3px 0;">✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦</div>
-      <p style="color:#8a7070;line-height:1.7;font-size:11px;">Conference participation highlights, talks attended, and key cybersecurity takeaways from Bsides 2025.</p>
-      <p style="color:#8a7070;line-height:1.7;font-size:11px;">Ideal for networking notes, favorite sessions, and ideas carried into projects.</p>
+      <p style="color:#8a7070;line-height:1.7;font-size:11px;">At BSides, I connected with passionate cybersecurity professionals across offensive security, DFIR, threat detection, and cloud security.</p>
+      <p style="color:#8a7070;line-height:1.7;font-size:11px;">I had meaningful conversations about different career paths in the field, attended excellent talks, and spent a lot of time in hands-on workshops, especially lockpicking.</p>
+      <p style="color:#8a7070;line-height:1.7;font-size:11px;">The experience was deeply inspiring and pushed me to keep going deeper in cybersecurity by learning directly from practitioners who live this work every day.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px;">
+        <img src="${bsides2025Img1}" alt="BSides 2025 photo 1" style="width:100%;height:120px;object-fit:cover;border:1px solid #c4aeb8;background:#fff9fc;" />
+        <img src="${bsides2025Img2}" alt="BSides 2025 photo 2" style="width:100%;height:120px;object-fit:cover;border:1px solid #c4aeb8;background:#fff9fc;" />
+      </div>
     `,
   },
 };

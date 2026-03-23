@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c08e0e1a.css",
+    "main.js": "/static/js/main.78717f83.js",
+    "static/media/bsides-2025-2.png": "/static/media/bsides-2025-2.198b88eeb7746a0f0d39.png",
+    "static/media/lockpicking-1.png": "/static/media/lockpicking-1.ea906c7614095057dc6e.png",
+    "static/media/ieeexhtb-ctf-2.png": "/static/media/ieeexhtb-ctf-2.c0c1cca7df2baa956289.png",
+    "static/media/bsides-2025-1.png": "/static/media/bsides-2025-1.f9796e396cb767d237e0.png",
+    "static/media/lockpicking-2.png": "/static/media/lockpicking-2.d37afed7e1806d8587fe.png",
+    "static/media/cybersci-2.png": "/static/media/cybersci-2.0c9ab7ab28284180ecaf.png",
+    "static/media/ieeexhtb-ctf-1.png": "/static/media/ieeexhtb-ctf-1.e5814c4a0fbefb25ad76.png",
+    "static/media/projects.png": "/static/media/projects.c5608cfbfd3f4d372b66.png",
+    "static/media/cybersci-1.png": "/static/media/cybersci-1.712349a372d23c42c16f.png",
+    "static/media/aboutme.png": "/static/media/aboutme.621c4559dbaaf9bc61b1.png",
+    "static/media/skills.png": "/static/media/skills.2a104102564bc54b61a8.png",
+    "static/media/contact.png": "/static/media/contact.177152f0102a2c8c27b8.png",
+    "static/media/folder2.png": "/static/media/folder2.591c9910218b7c92e05b.png",
+    "static/media/PPEditorialOld-Italic.otf": "/static/media/PPEditorialOld-Italic.8da413be0c38e4c9e71f.otf",
+    "index.html": "/index.html",
+    "main.c08e0e1a.css.map": "/static/css/main.c08e0e1a.css.map",
+    "main.78717f83.js.map": "/static/js/main.78717f83.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c08e0e1a.css",
+    "static/js/main.78717f83.js"
+  ]
+}

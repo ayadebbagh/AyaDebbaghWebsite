@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         mono:   ['"Share Tech Mono"', 'monospace'],
-        script: ['"Dancing Script"', 'cursive'],
+        script: ['"PPEditorialOld-Italic"', 'cursive'],
       },
       colors: {
         desktop:   '#ede6dd',

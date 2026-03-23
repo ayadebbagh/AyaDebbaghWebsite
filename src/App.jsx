@@ -31,6 +31,19 @@ function useClock() {
 }
 
 let winZCounter = 30;
+const TERMINAL_WIDTH = 620;
+const TERMINAL_HEIGHT = 430;
+
+function getCenteredTerminalPos() {
+  if (typeof window === 'undefined') {
+    return { left: 100, top: 18 };
+  }
+
+  return {
+    left: Math.max(0, Math.round((window.innerWidth - TERMINAL_WIDTH) / 2)),
+    top: Math.max(0, Math.round((window.innerHeight - TERMINAL_HEIGHT) / 2)),
+  };
+}
 
 const PROJECT_ITEMS = [
   { key: 'homelab-ir',          name: 'homelab-ir',          desc: 'enterprise homelab + incident response' },
@@ -50,9 +63,16 @@ export default function App() {
   const clock     = useClock();
   const canvasRef = useRef(null);
 
-  const [windows, setWindows] = useState([
-    { id: 'terminal', type: 'terminal', title: 'terminal', pos: { left: 100, top: 18 }, zIndex: 20, visible: true },
-  ]);
+  const [windows, setWindows] = useState(() => ([
+    {
+      id: 'terminal',
+      type: 'terminal',
+      title: 'terminal',
+      pos: getCenteredTerminalPos(),
+      zIndex: 20,
+      visible: true,
+    },
+  ]));
 
   const bringToFront = useCallback((id) => {
     winZCounter++;

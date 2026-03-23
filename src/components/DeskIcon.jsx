@@ -5,18 +5,26 @@ export default function DeskIcon({ id, label, imgSrc, glyphText, style, onClick,
   const dragging   = useRef(false);
   const moved      = useRef(false);
   const offset     = useRef({ x: 0, y: 0 });
+  const startPoint = useRef({ x: 0, y: 0 });
   const [pos, setPos] = useState({ left: style?.left || 0, top: style?.top || 0 });
+
+  const DRAG_THRESHOLD_PX = 6;
 
   const handleMouseDown = useCallback((e) => {
     dragging.current = true;
     moved.current    = false;
+    startPoint.current = { x: e.clientX, y: e.clientY };
     const r  = ref.current.getBoundingClientRect();
     const cr = canvasRef.current.getBoundingClientRect();
     offset.current = { x: e.clientX - (r.left - cr.left), y: e.clientY - (r.top - cr.top) };
     e.preventDefault();
 
     const onMove = (ev) => {
+      const dx = ev.clientX - startPoint.current.x;
+      const dy = ev.clientY - startPoint.current.y;
+      if (!moved.current && Math.hypot(dx, dy) < DRAG_THRESHOLD_PX) return;
       moved.current = true;
+
       const cr2 = canvasRef.current.getBoundingClientRect();
       let nx = ev.clientX - cr2.left - offset.current.x;
       let ny = ev.clientY - cr2.top  - offset.current.y;

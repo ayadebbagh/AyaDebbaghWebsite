@@ -127,7 +127,7 @@ export default function Terminal({ onOpenFile }) {
           { type: 'resp',  text: '  cd fun stuff/   — enter fun stuff dir' },
           { type: 'resp',  text: '  whoami          — identity check' },
           { type: 'resp',  text: '  clear           — clear terminal' },
-          { type: 'resp',  text: '  stars           — ✦ something pretty' },
+          { type: 'resp',  text: '  secret           — secret' },
         ];
       }
     } else if (cmd === 'ls') {
