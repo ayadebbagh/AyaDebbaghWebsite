@@ -10,21 +10,32 @@ import lockpickingImg2 from './assets/lockpicking-2.png';
 // ── file content rendered inside file viewer windows ──
 export const fileContents = {
   about: {
-    title: 'about.txt',
-    html: `
-      <h3 style="font-family:'PPEditorialOld-Italic',cursive;color:#7a3f60;font-size:22px;margin-bottom:5px;">✦ Aya Debbagh</h3>
-      <div style="text-align:center;color:#c4aeb8;font-size:10px;letter-spacing:3px;padding:2px 0;margin:3px 0;">✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦</div>
-      <p style="color:#8a7070;line-height:1.7;margin-bottom:6px;font-size:11px;">hi. i'm a cybersecurity researcher who builds beautiful things that break beautiful things. security doesn't have to look like it was designed in 1997.</p>
-      <p style="color:#8a7070;line-height:1.7;margin-bottom:6px;font-size:11px;">somewhere between the terminal and a dream. obsessed with network forensics, malware analysis, and making the command line look like a fever dream.</p>
-      <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:7px;">
-        <span style="font-size:9px;padding:2px 7px;border:1px solid #c4aeb8;color:#7a3f60;background:#fbeef4;">pentesting</span>
-        <span style="font-size:9px;padding:2px 7px;border:1px solid #c4aeb8;color:#7a3f60;background:#fbeef4;">malware analysis</span>
-        <span style="font-size:9px;padding:2px 7px;border:1px solid #c4aeb8;color:#7a3f60;background:#fbeef4;">CTF</span>
-        <span style="font-size:9px;padding:2px 7px;border:1px solid #c4aeb8;color:#7a3f60;background:#fbeef4;">forensics</span>
-        <span style="font-size:9px;padding:2px 7px;border:1px solid #c4aeb8;color:#7a3f60;background:#fbeef4;">she/her</span>
-      </div>
-    `,
-  },
+  title: 'about.txt',
+  html: `
+    <h3 style="font-family:'PPEditorialOld-Italic',cursive;color:#7a3f60;font-size:22px;margin-bottom:5px;">✦ Aya Debbagh</h3>
+    <div style="text-align:center;color:#c4aeb8;font-size:10px;letter-spacing:3px;padding:2px 0;margin:6px 0;">✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦</div>
+
+    <p style="color:#8a7070;line-height:1.8;margin-bottom:8px;font-size:11px;">
+      Hi! I'm Aya. I'm a software engineering student. curious about how systems work, and how they break.
+    </p>
+    <p style="color:#8a7070;line-height:1.8;margin-bottom:8px;font-size:11px;">
+      After earning my comptia security+, i've been going deeper, network security, threat analysis, secure application design. Not just building things, but building things that <span style="color:#7a3f60;">hold</span>.
+    </p>
+    <p style="color:#8a7070;line-height:1.8;margin-bottom:10px;font-size:11px;">
+      I stay involved in the security community, keep learning, keep collaborating. The field moves fast and i like moving with it.
+    </p>
+
+    <div style="text-align:center;color:#c4aeb8;font-size:10px;letter-spacing:3px;padding:2px 0;margin:6px 0;">✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦</div>
+
+    <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:7px;">
+      <span style="font-size:9px;padding:2px 7px;border:1px solid #c4aeb8;color:#7a3f60;background:#fbeef4;">software engineering</span>
+      <span style="font-size:9px;padding:2px 7px;border:1px solid #c4aeb8;color:#7a3f60;background:#fbeef4;">comptia sec+</span>
+      <span style="font-size:9px;padding:2px 7px;border:1px solid #c4aeb8;color:#7a3f60;background:#fbeef4;">network security</span>
+      <span style="font-size:9px;padding:2px 7px;border:1px solid #c4aeb8;color:#7a3f60;background:#fbeef4;">threat analysis</span>
+      <span style="font-size:9px;padding:2px 7px;border:1px solid #c4aeb8;color:#7a3f60;background:#fbeef4;">she/her</span>
+    </div>
+  `,
+},
 
   skills: {
     title: 'skills.sh',
@@ -57,12 +68,12 @@ export const fileContents = {
   contact: {
     title: 'contact',
     html: `
-      <h3 style="font-family:'PPEditorialOld-Italic',cursive;color:#7a3f60;font-size:22px;margin-bottom:5px;">✦ reach me</h3>
+      <h3 style="font-family:'PPEditorialOld-Italic',cursive;color:#7a3f60;font-size:22px;margin-bottom:5px;">✦ Reach Me</h3>
       <div style="text-align:center;color:#c4aeb8;font-size:10px;letter-spacing:3px;padding:2px 0;margin:3px 0;">✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦</div>
       <p style="font-size:11px;"><span style="color:#7a3f60;">email</span>&nbsp;&nbsp; <span style="color:#6a7a9a;">debbagh.aya@gmail.com</span></p>
       <p style="margin-top:6px;font-size:11px;"><span style="color:#7a3f60;">github</span>&nbsp; <span style="color:#6a7a9a;">github.com/ayadebbagh</span></p>
       <p style="margin-top:6px;font-size:11px;"><span style="color:#7a3f60;">linkedin</span>&nbsp; <span style="color:#6a7a9a;">linkedin.com/in/ayadebbagh/</span></p>
-      <p style="margin-top:10px;color:#c0b0b0;font-size:10px;">pgp key available on request ✦</p>
+
     `,
   },
 

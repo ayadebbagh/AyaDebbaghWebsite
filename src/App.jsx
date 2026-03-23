@@ -33,15 +33,60 @@ function useClock() {
 let winZCounter = 30;
 const TERMINAL_WIDTH = 620;
 const TERMINAL_HEIGHT = 430;
+const FOLDER_WIDTH = 520;
+const FOLDER_HEIGHT = 380;
+const FILE_WIDTH = 460;
+const FILE_HEIGHT = 340;
 
-function getCenteredTerminalPos() {
+function getCenteredPos(width, height) {
   if (typeof window === 'undefined') {
     return { left: 100, top: 18 };
   }
 
   return {
-    left: Math.max(0, Math.round((window.innerWidth - TERMINAL_WIDTH) / 2)),
-    top: Math.max(0, Math.round((window.innerHeight - TERMINAL_HEIGHT) / 2)),
+    left: Math.max(0, Math.round((window.innerWidth - width) / 2)),
+    top: Math.max(0, Math.round((window.innerHeight - height) / 2)),
+  };
+}
+
+function getCenteredTerminalPos() {
+  return getCenteredPos(TERMINAL_WIDTH, TERMINAL_HEIGHT);
+}
+
+function isMobileViewport() {
+  if (typeof window === 'undefined') return false;
+
+  const coarsePointer = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  return window.innerWidth <= 900 || coarsePointer;
+}
+
+function getWindowSize(type, isMobile) {
+  if (!isMobile || typeof window === 'undefined') {
+    if (type === 'terminal') return { width: TERMINAL_WIDTH, height: TERMINAL_HEIGHT };
+    if (type === 'folder') return { width: FOLDER_WIDTH, height: FOLDER_HEIGHT };
+    return { width: FILE_WIDTH, height: FILE_HEIGHT };
+  }
+
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+
+  if (type === 'terminal') {
+    return {
+      width: Math.min(560, Math.max(300, vw - 20)),
+      height: Math.min(520, Math.max(250, vh - 140)),
+    };
+  }
+
+  if (type === 'folder') {
+    return {
+      width: Math.min(500, Math.max(280, vw - 20)),
+      height: Math.min(500, Math.max(260, vh - 130)),
+    };
+  }
+
+  return {
+    width: Math.min(460, Math.max(270, vw - 20)),
+    height: Math.min(460, Math.max(240, vh - 130)),
   };
 }
 
@@ -62,17 +107,33 @@ const FUN_STUFF_ITEMS = [
 export default function App() {
   const clock     = useClock();
   const canvasRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(() => isMobileViewport());
+  const [showMobileNotice, setShowMobileNotice] = useState(true);
+
+  useEffect(() => {
+    const handleViewportChange = () => setIsMobile(isMobileViewport());
+    handleViewportChange();
+
+    window.addEventListener('resize', handleViewportChange);
+    return () => window.removeEventListener('resize', handleViewportChange);
+  }, []);
 
   const [windows, setWindows] = useState(() => ([
-    {
-      id: 'terminal',
-      type: 'terminal',
-      title: 'terminal',
-      pos: getCenteredTerminalPos(),
-      zIndex: 20,
-      visible: true,
-    },
+    (() => {
+      const mobileAtLoad = isMobileViewport();
+      const terminalSize = getWindowSize('terminal', mobileAtLoad);
+      return {
+        id: 'terminal',
+        type: 'terminal',
+        title: 'terminal',
+        pos: getCenteredPos(terminalSize.width, terminalSize.height),
+        zIndex: 20,
+        visible: !mobileAtLoad,
+      };
+    })(),
   ]));
+
+  const getSize = useCallback((type) => getWindowSize(type, isMobile), [isMobile]);
 
   const bringToFront = useCallback((id) => {
     winZCounter++;
@@ -87,6 +148,7 @@ export default function App() {
   const openFileWindow = useCallback((fileKey, title) => {
     winZCounter++;
     const id = `file-${fileKey}-${Date.now()}`;
+    const fileSize = getSize('file');
     setWindows(prev => [
       ...prev,
       {
@@ -94,20 +156,28 @@ export default function App() {
         type: 'file',
         fileKey,
         title: title || fileKey,
-        pos: { left: 140 + Math.random() * 80, top: 40 + Math.random() * 40 },
+        pos: isMobile
+          ? getCenteredPos(fileSize.width, fileSize.height)
+          : { left: 140 + Math.random() * 80, top: 40 + Math.random() * 40 },
         zIndex: winZCounter,
         visible: true,
       },
     ]);
-  }, []);
+  }, [getSize, isMobile]);
 
   const openProjectsFolder = useCallback(() => {
     setWindows(prev => {
       const existing = prev.find(w => w.id === 'projects-folder');
+      const folderSize = getSize('folder');
       if (existing) {
         winZCounter++;
         return prev.map(w => w.id === 'projects-folder'
-          ? { ...w, visible: true, zIndex: winZCounter }
+          ? {
+              ...w,
+              visible: true,
+              zIndex: winZCounter,
+              pos: isMobile ? getCenteredPos(folderSize.width, folderSize.height) : w.pos,
+            }
           : w
         );
       }
@@ -116,20 +186,26 @@ export default function App() {
         id: 'projects-folder',
         type: 'folder',
         title: 'projects/',
-        pos: { left: 160, top: 60 },
+        pos: isMobile ? getCenteredPos(folderSize.width, folderSize.height) : { left: 160, top: 60 },
         zIndex: winZCounter,
         visible: true,
       }];
     });
-  }, []);
+  }, [getSize, isMobile]);
 
   const openFunStuffFolder = useCallback(() => {
     setWindows(prev => {
       const existing = prev.find(w => w.id === 'fun-stuff-folder');
+      const folderSize = getSize('folder');
       if (existing) {
         winZCounter++;
         return prev.map(w => w.id === 'fun-stuff-folder'
-          ? { ...w, visible: true, zIndex: winZCounter }
+          ? {
+              ...w,
+              visible: true,
+              zIndex: winZCounter,
+              pos: isMobile ? getCenteredPos(folderSize.width, folderSize.height) : w.pos,
+            }
           : w
         );
       }
@@ -139,22 +215,28 @@ export default function App() {
         type: 'folder',
         folderKey: 'fun-stuff',
         title: 'fun stuff/',
-        pos: { left: 230, top: 90 },
+        pos: isMobile ? getCenteredPos(folderSize.width, folderSize.height) : { left: 230, top: 90 },
         zIndex: winZCounter,
         visible: true,
       }];
     });
-  }, []);
+  }, [getSize, isMobile]);
 
   const openTerminal = useCallback(() => {
     setWindows(prev => {
       winZCounter++;
+      const terminalSize = getSize('terminal');
       return prev.map(w => w.id === 'terminal'
-        ? { ...w, visible: true, zIndex: winZCounter }
+        ? {
+            ...w,
+            visible: true,
+            zIndex: winZCounter,
+            pos: isMobile ? getCenteredPos(terminalSize.width, terminalSize.height) : w.pos,
+          }
         : w
       );
     });
-  }, []);
+  }, [getSize, isMobile]);
 
   const stars = useRef(
     Array.from({ length: 40 }, (_, i) => ({
@@ -166,6 +248,10 @@ export default function App() {
       sz:   7 + Math.random() * 7,
     }))
   ).current;
+
+  const terminalSize = getSize('terminal');
+  const folderSize = getSize('folder');
+  const fileSize = getSize('file');
 
   return (
     <div className="w-screen h-screen bg-desktop font-mono overflow-hidden relative flex flex-col">
@@ -187,6 +273,25 @@ export default function App() {
         </div>
       </div>
 
+      {isMobile && showMobileNotice && (
+        <div className="relative z-50 px-3 pt-2 pointer-events-none">
+          <div className="mx-auto max-w-[560px] rounded border border-[#c9a8b8] bg-[#fff7fb]/95 text-[#7a3f60] px-3 py-2 text-[11px] leading-snug flex items-start gap-2 pointer-events-auto shadow-sm">
+            <span className="text-[12px]">✦</span>
+            <p className="flex-1">
+              This portfolio works best on a laptop. Some features (like terminal interactions and window dragging) are limited on mobile.
+            </p>
+            <button
+              type="button"
+              aria-label="Dismiss mobile notice"
+              onClick={() => setShowMobileNotice(false)}
+              className="text-[10px] text-pink hover:text-[#9d557b]"
+            >
+              dismiss
+            </button>
+          </div>
+        </div>
+      )}
+
       <div ref={canvasRef} className="relative flex-1 overflow-hidden z-10">
 
         <DeskIcon id="di-term"     label="terminal"  glyphText=">_"      style={{ left: 16, top: 12  }} canvasRef={canvasRef} onClick={openTerminal} />
@@ -205,7 +310,7 @@ export default function App() {
                 title={<><span className="text-[#b09090]">bash</span> — ~/aya — 80×24</>}
                 visible={w.visible} onClose={() => closeWindow(w.id)}
                 onFocus={() => bringToFront(w.id)}
-                initialPos={w.pos} zIndex={w.zIndex} width={620} height={430}>
+                initialPos={w.pos} zIndex={w.zIndex} width={terminalSize.width} height={terminalSize.height}>
                 <Terminal onOpenFile={(key, title) => openFileWindow(key, title)} />
               </Window>
             );
@@ -217,7 +322,7 @@ export default function App() {
               <Window key={w.id} id={w.id} title={isFunStuff ? 'fun stuff/' : 'projects/'}
                 visible={w.visible} onClose={() => closeWindow(w.id)}
                 onFocus={() => bringToFront(w.id)}
-                initialPos={w.pos} zIndex={w.zIndex} width={520} height={380}>
+                initialPos={w.pos} zIndex={w.zIndex} width={folderSize.width} height={folderSize.height}>
                 <FolderViewer
                   title={isFunStuff ? 'fun stuff/' : 'projects/'}
                   imgSrc={isFunStuff ? folder2Img : projectsImg}
@@ -234,7 +339,7 @@ export default function App() {
               <Window key={w.id} id={w.id} title={w.title}
                 visible={w.visible} onClose={() => closeWindow(w.id)}
                 onFocus={() => bringToFront(w.id)}
-                initialPos={w.pos} zIndex={w.zIndex} width={460} height={340}>
+                initialPos={w.pos} zIndex={w.zIndex} width={fileSize.width} height={fileSize.height}>
                 <FileViewer fileKey={w.fileKey} />
               </Window>
             );
