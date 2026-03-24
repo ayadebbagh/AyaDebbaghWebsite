@@ -8,25 +8,25 @@ module.exports = {
         script: ['"PPEditorialOld-Italic"', 'cursive'],
       },
       colors: {
-        desktop:   '#ede6dd',
-        taskbar:   '#e2d6cc',
-        tbar:      '#e0d0cc',
-        border:    '#c4aeb8',
-        termbg:    '#faf4f0',
-        winbg:     '#f5edea',
-        pink:      '#7a3f60',
-        pinklt:    '#c4a4b4',
-        pinkbg:    '#fbeef4',
-        cursor:    '#b4749c',
-        tgreen:    '#4a7a6a',
-        tblue:     '#6a7a9a',
-        tmuted:    '#b5a8a8',
-        ttext:     '#7a5c6a',
-        tdim:      '#9a8080',
-        tstar:     '#b4749c',
-        twarn:     '#a07840',
-        butterfly: '#9a6080',
-        closebtn:  '#c96060',
+        desktop:   '#EEDFD2',   // Almond Cream
+        taskbar:   '#E8D5C5',   // slightly darker Almond Cream
+        tbar:      '#270722',   // Midnight Violet title bar
+        border:    '#D897B8',   // Pink Mist
+        termbg:    '#F6EEE6',   // light terminal bg
+        winbg:     '#F2E8DC',   // window bg
+        pink:      '#270722',   // Midnight Violet
+        pinklt:    '#D897B8',   // Pink Mist
+        pinkbg:    '#F5EBF2',   // light pink bg
+        cursor:    '#D897B8',   // Pink Mist cursor
+        tgreen:    '#7A9A50',   // darker Tea Green
+        tblue:     '#63768D',   // Slate Grey
+        tmuted:    '#B0A8B8',   // muted
+        ttext:     '#4A3858',   // dark violet text
+        tdim:      '#8A8090',   // dimmed
+        tstar:     '#D897B8',   // Pink Mist
+        twarn:     '#a07840',   // amber warning
+        butterfly: '#34092E',   // deep dark purple for ASCII art
+        closebtn:  '#c96060',   // close button red
       },
       animation: {
         blink:  'blink 1s step-end infinite',

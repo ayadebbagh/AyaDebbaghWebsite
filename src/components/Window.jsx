@@ -44,7 +44,7 @@ export default function Window({ id, title, visible, onClose, onFocus, children,
         className="flex items-center justify-between px-2 py-1 bg-tbar border-b border-border cursor-grab active:cursor-grabbing select-none"
         onMouseDown={handleTitleBarDown}
       >
-        <span className="text-[10px] text-pink font-mono">{title}</span>
+        <span className="text-[10px] text-pinklt font-mono">{title}</span>
         <button
           onClick={onClose}
           className="w-3.5 h-3.5 rounded-full border-[1.5px] border-[#a04040] bg-closebtn text-white text-[9px] flex items-center justify-center leading-none hover:bg-[#a03030] transition-colors"

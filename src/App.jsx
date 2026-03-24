@@ -267,7 +267,7 @@ export default function App() {
 
       <div className="relative z-50 flex items-center justify-between px-3.5 py-1 bg-taskbar border-b border-border">
         <span className="font-script text-[17px] text-pink">✦ Aya Debbagh</span>
-        <div className="flex items-center gap-2.5 text-[10px] text-dim">
+        <div className="flex items-center gap-2.5 text-[10px] text-tdim">
           <span>{clock}</span>
           <span className="text-pink">✦</span>
         </div>
@@ -350,7 +350,7 @@ export default function App() {
 
       </div>
 
-      <div className="relative z-50 flex items-center gap-3.5 px-3.5 py-1 bg-taskbar border-t border-border text-[10px] text-dim">
+      <div className="relative z-50 flex items-center gap-3.5 px-3.5 py-1 bg-taskbar border-t border-border text-[10px] text-tdim">
         <span>
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#7ab898] mr-1 animate-blink2" />
           <span className="text-pink">online</span>
