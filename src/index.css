@@ -18,3 +18,11 @@ body { overflow: hidden; background: #EEDFD2; }
 .term-scroll::-webkit-scrollbar { width: 4px; }
 .term-scroll::-webkit-scrollbar-track { background: transparent; }
 .term-scroll::-webkit-scrollbar-thumb { background: #D897B8; border-radius: 2px; }
+
+.toast-fade { animation: toastFade 4s ease forwards; }
+@keyframes toastFade {
+  0%   { opacity: 0; transform: translateY(8px); }
+  15%  { opacity: 1; transform: translateY(0);   }
+  75%  { opacity: 1; transform: translateY(0);   }
+  100% { opacity: 0; transform: translateY(4px); }
+}

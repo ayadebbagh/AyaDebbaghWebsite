@@ -3,7 +3,9 @@ import DeskIcon   from './components/DeskIcon';
 import Window     from './components/Window';
 import Terminal   from './components/Terminal';
 import FileViewer from './components/FileViewer';
-import FolderViewer from './components/FolderViewer';
+import FolderViewer   from './components/FolderViewer';
+import EggChecklist  from './components/EggChecklist';
+import { EASTER_EGGS } from './data';
 
 import aboutImg    from './assets/aboutme.png';
 import contactImg  from './assets/contact.png';
@@ -109,6 +111,12 @@ export default function App() {
   const canvasRef = useRef(null);
   const [isMobile, setIsMobile] = useState(() => isMobileViewport());
   const [showMobileNotice, setShowMobileNotice] = useState(true);
+
+  const [foundEggs, setFoundEggs] = useState([]);
+  const sessionFoundRef     = useRef(false);
+  const [toast, setToast]   = useState(null);
+  const toastTimerRef       = useRef(null);
+  const openEggChecklistRef = useRef(null);
 
   useEffect(() => {
     const handleViewportChange = () => setIsMobile(isMobileViewport());
@@ -238,6 +246,43 @@ export default function App() {
     });
   }, [getSize, isMobile]);
 
+  const openEggChecklist = useCallback(() => {
+    setWindows(prev => {
+      const existing = prev.find(w => w.id === 'egg-checklist');
+      const sz = getSize('file');
+      if (existing) {
+        winZCounter++;
+        return prev.map(w => w.id === 'egg-checklist'
+          ? { ...w, visible: true, zIndex: winZCounter, pos: isMobile ? getCenteredPos(sz.width, sz.height) : w.pos }
+          : w
+        );
+      }
+      winZCounter++;
+      return [...prev, {
+        id: 'egg-checklist', type: 'egg-checklist', title: 'flags.txt',
+        pos: isMobile ? getCenteredPos(sz.width, sz.height) : { left: 200, top: 80 },
+        zIndex: winZCounter, visible: true,
+      }];
+    });
+  }, [getSize, isMobile]);
+
+  openEggChecklistRef.current = openEggChecklist;
+
+  const handleEggFound = useCallback((key) => {
+    setFoundEggs(prev => {
+      if (prev.includes(key)) return prev;
+      const next = [...prev, key];
+      if (!sessionFoundRef.current) {
+        sessionFoundRef.current = true;
+        setTimeout(() => openEggChecklistRef.current?.(), 0);
+      }
+      if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+      setToast({ text: `✦ flag captured! [${next.length}/${EASTER_EGGS.length}]  —  type 'flags' to view board`, id: Date.now() });
+      toastTimerRef.current = setTimeout(() => setToast(null), 4000);
+      return next;
+    });
+  }, []);
+
   const stars = useRef(
     Array.from({ length: 40 }, (_, i) => ({
       id:   i,
@@ -311,7 +356,11 @@ export default function App() {
                 visible={w.visible} onClose={() => closeWindow(w.id)}
                 onFocus={() => bringToFront(w.id)}
                 initialPos={w.pos} zIndex={w.zIndex} width={terminalSize.width} height={terminalSize.height}>
-                <Terminal onOpenFile={(key, title) => openFileWindow(key, title)} />
+                <Terminal
+                  onOpenFile={(key, title) => openFileWindow(key, title)}
+                  onEggFound={handleEggFound}
+                  onOpenFlags={openEggChecklist}
+                />
               </Window>
             );
           }
@@ -345,10 +394,31 @@ export default function App() {
             );
           }
 
+          if (w.type === 'egg-checklist') {
+            const sz = getSize('file');
+            return (
+              <Window key={w.id} id={w.id} title={w.title}
+                visible={w.visible} onClose={() => closeWindow(w.id)}
+                onFocus={() => bringToFront(w.id)}
+                initialPos={w.pos} zIndex={w.zIndex}
+                width={sz.width} height={sz.height}>
+                <EggChecklist foundEggs={foundEggs} />
+              </Window>
+            );
+          }
+
           return null;
         })}
 
       </div>
+
+      {toast && (
+        <div key={toast.id} className="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] pointer-events-none">
+          <div className="toast-fade bg-[#270722] text-[#D897B8] font-mono text-[10px] px-4 py-2 border border-[#D897B8]/40 whitespace-nowrap">
+            {toast.text}
+          </div>
+        </div>
+      )}
 
       <div className="relative z-50 flex items-center gap-3.5 px-3.5 py-1 bg-taskbar border-t border-border text-[10px] text-tdim">
         <span>

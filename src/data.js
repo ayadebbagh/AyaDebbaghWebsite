@@ -261,3 +261,17 @@ export const pathNames = {
   projects: '~/aya/projects',
   'fun-stuff': '~/aya/fun stuff',
 };
+
+// ── CTF easter egg registry ──────────────────────────────────────────────────
+export const EASTER_EGGS = [
+  { key: 'rm_rf',     flag: 'FLAG{nice_try_rm_rf_wont_work_here}',    hint: 'tried to delete everything'          },
+  { key: 'sudo',      flag: 'FLAG{aya_is_not_in_the_sudoers_file}',   hint: 'invoked the sudo prayer'             },
+  { key: 'cat_passwd',flag: 'FLAG{root_goes_to_aya_actually}',        hint: 'peeked at /etc/passwd'               },
+  { key: 'ls_hidden', flag: 'FLAG{dotfiles_are_not_secrets}',         hint: 'found the hidden dotfiles'          },
+  { key: 'hack',      flag: 'FLAG{hack_the_planet_1995}',             hint: 'hacked the mainframe'               },
+  { key: 'secret',    flag: 'FLAG{you_read_the_help_menu}',           hint: 'discovered the secret command'      },
+  { key: 'nmap',      flag: 'FLAG{scanning_a_portfolio_site_lol}',    hint: 'ran a port scan on localhost'        },
+  { key: 'python',    flag: 'FLAG{aya_is_hireable_true}',             hint: 'opened the python repl'             },
+  { key: 'vim',       flag: 'FLAG{escape_colon_q_bang}',              hint: 'got trapped in vim'                 },
+  { key: 'uname',     flag: 'FLAG{linux_aya_pink_SMP_1337}',          hint: 'interrogated the kernel'            },
+];

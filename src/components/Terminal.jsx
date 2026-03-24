@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { fileContents, filesystem, pathNames } from '../data';
+import { fileContents, filesystem, pathNames, EASTER_EGGS } from '../data';
 
 const BUTTERFLY = [
   "            ,ggg,                         ",
@@ -45,6 +45,89 @@ const STARS_ART = `pls hire me
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡞⣁⡀⠀⡞⠁
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠈⠙⠁⠀`;
 
+// ── Easter egg detection ─────────────────────────────────────────────────────
+function detectEasterEgg(cmd) {
+  if (/^rm\s+-/.test(cmd) || cmd.startsWith('del /f') || /^format\s+c/.test(cmd)) return 'rm_rf';
+  if (cmd.startsWith('sudo ') || cmd === 'sudo') return 'sudo';
+  if (cmd === 'cat /etc/passwd' || cmd === 'cat /etc/shadow') return 'cat_passwd';
+  if (cmd === 'ls -la' || cmd === 'ls -a' || cmd === 'ls -al') return 'ls_hidden';
+  if (cmd === 'hack' || cmd === 'hack the planet') return 'hack';
+  if (cmd === 'secret') return 'secret';
+  if (cmd === 'nmap' || cmd.startsWith('nmap ')) return 'nmap';
+  if (cmd === 'python' || cmd === 'python3') return 'python';
+  if (cmd === 'vim' || cmd === 'vi') return 'vim';
+  if (cmd === 'uname' || cmd.startsWith('uname ')) return 'uname';
+  return null;
+}
+
+const EGG_RESPONSES = {
+  rm_rf: [
+    { type: 'warn',  text: "rm: cannot remove '/': Operation not permitted" },
+    { type: 'warn',  text: 'nuh uh. this filesystem is read-only 😐' },
+    { type: 'muted', text: '(nice try though)' },
+  ],
+  sudo: [
+    { type: 'muted', text: '[sudo] password for aya: ········' },
+    { type: 'warn',  text: 'aya is not in the sudoers file. this incident will be reported.' },
+  ],
+  cat_passwd: [
+    { type: 'resp',  text: 'root:x:0:0:root:/root:/bin/bash' },
+    { type: 'resp',  text: 'aya:x:1337:1337:aya debbagh:/home/aya:/bin/zsh' },
+    { type: 'resp',  text: 'intern:x:9999:9999:pls hire:/dev/null:/bin/false' },
+    { type: 'muted', text: '(not a real passwd file, but nice try)' },
+  ],
+  ls_hidden: [
+    { type: 'resp',  text: 'total 42' },
+    { type: 'resp',  text: '-rw-r--r--  aya  about.txt' },
+    { type: 'resp',  text: 'drwxr-xr-x  aya  projects/' },
+    { type: 'resp',  text: '-rwxr-xr-x  aya  skills.sh' },
+    { type: 'resp',  text: '-rw-r--r--  aya  .bash_history' },
+    { type: 'resp',  text: '-rw-------  aya  .secret_notes' },
+    { type: 'resp',  text: '-rwx------  aya  .flag  ← you found me 👀' },
+  ],
+  hack: [
+    { type: 'resp',  text: '[░░░░░░░░░░] initializing breach...' },
+    { type: 'resp',  text: '[▓▓▓░░░░░░░] bypassing firewall...' },
+    { type: 'resp',  text: '[▓▓▓▓▓▓░░░░] injecting payload...' },
+    { type: 'resp',  text: '[▓▓▓▓▓▓▓▓▓▓] access granted.' },
+    { type: 'muted', text: '  welcome to the mainframe.' },
+  ],
+  secret: [
+    { type: 'star',  text: '✦ you found it ✦' },
+    { type: 'resp',  text: "there's no grand secret." },
+    { type: 'resp',  text: 'the secret is: keep building, keep learning, hire aya.' },
+  ],
+  nmap: [
+    { type: 'muted', text: 'Starting Nmap 7.94 ( https://nmap.org )' },
+    { type: 'resp',  text: 'Nmap scan report for aya-portfolio (127.0.0.1)' },
+    { type: 'resp',  text: 'PORT      STATE   SERVICE' },
+    { type: 'resp',  text: '80/tcp    open    http' },
+    { type: 'resp',  text: '443/tcp   open    https' },
+    { type: 'resp',  text: '1337/tcp  open    aya-is-hireable' },
+    { type: 'muted', text: 'Nmap done: 1 IP address (1 host up)' },
+  ],
+  python: [
+    { type: 'resp',  text: 'Python 3.12.0 (aya build, pink edition)' },
+    { type: 'resp',  text: '>>> import aya' },
+    { type: 'resp',  text: '>>> aya.is_hireable()' },
+    { type: 'star',  text: 'True' },
+    { type: 'resp',  text: '>>> exit()' },
+  ],
+  vim: [
+    { type: 'resp',  text: '~' },
+    { type: 'resp',  text: '~   VIM - Vi IMproved 9.1' },
+    { type: 'resp',  text: '~' },
+    { type: 'resp',  text: '~ "portfolio.md" 42L, 1337C' },
+    { type: 'warn',  text: 'you are now trapped. type :q! to escape.' },
+    { type: 'muted', text: "(hint: you can't. this is a portfolio.)" },
+  ],
+  uname: [
+    { type: 'resp',  text: 'Linux aya-portfolio 6.6.0-pink #1337 SMP' },
+    { type: 'resp',  text: 'x86_64 GNU/Linux' },
+    { type: 'muted', text: 'kernel built with love ♡ and too much caffeine' },
+  ],
+};
+
 function Line({ type, text }) {
   const colors = {
     prompt:    'text-pink',
@@ -62,7 +145,7 @@ function Line({ type, text }) {
   );
 }
 
-export default function Terminal({ onOpenFile }) {
+export default function Terminal({ onOpenFile, onEggFound, onOpenFlags }) {
   const [cwd, setCwd]           = useState('root');
   const [input, setInput]       = useState('');
   const [lines, setLines]       = useState([
@@ -108,6 +191,32 @@ export default function Terminal({ onOpenFile }) {
       return;
     }
 
+    // ── Easter eggs ──
+    const eggKey = detectEasterEgg(cmd);
+    if (eggKey) {
+      const egg = EASTER_EGGS.find(e => e.key === eggKey);
+      onEggFound?.(eggKey);
+      addLines([
+        ...submitted,
+        ...(EGG_RESPONSES[eggKey] || []),
+        ...(egg ? [{ type: 'star', text: `✦ ${egg.flag}` }] : []),
+        { type: 'muted', text: "  type 'flags' to view your ctf board" },
+        { type: 'spacer', text: '' },
+      ]);
+      return;
+    }
+
+    // ── flags command ──
+    if (cmd === 'flags') {
+      onOpenFlags?.();
+      addLines([
+        ...submitted,
+        { type: 'star', text: '→ opening flag board ✦' },
+        { type: 'spacer', text: '' },
+      ]);
+      return;
+    }
+
     let output = [];
 
     if (cmd === 'help') {
@@ -127,7 +236,8 @@ export default function Terminal({ onOpenFile }) {
           { type: 'resp',  text: '  cd fun stuff/   — enter fun stuff dir' },
           { type: 'resp',  text: '  whoami          — identity check' },
           { type: 'resp',  text: '  clear           — clear terminal' },
-          { type: 'resp',  text: '  secret           — secret' },
+          { type: 'resp',  text: '  secret          — secret' },
+          { type: 'resp',  text: '  flags           — flag board' },
         ];
       }
     } else if (cmd === 'ls') {
@@ -158,7 +268,7 @@ export default function Terminal({ onOpenFile }) {
     }
 
     addLines([...submitted, ...output, { type: 'spacer', text: '' }]);
-  }, [addLines, getPath, onOpenFile]);
+  }, [addLines, getPath, onOpenFile, onEggFound, onOpenFlags]);
 
   const handleKeyDown = useCallback((e) => {
     if (e.key === 'Enter') {
