@@ -342,8 +342,8 @@ export default function App() {
         <DeskIcon id="di-term"     label="terminal"  glyphText=">_"      style={{ left: 16, top: 12  }} canvasRef={canvasRef} onClick={openTerminal} />
         <DeskIcon id="di-about"    label="about.txt" imgSrc={aboutImg}    style={{ left: 16, top: 138 }} canvasRef={canvasRef} onClick={() => openFileWindow('about',   'about.txt')} />
         <DeskIcon id="di-projects" label="projects/" imgSrc={projectsImg} style={{ left: 16, top: 264 }} canvasRef={canvasRef} onClick={openProjectsFolder} />
-        <DeskIcon id="di-skills"   label="skills.sh" imgSrc={skillsImg}   style={{ left: 16, top: 390 }} canvasRef={canvasRef} onClick={() => openFileWindow('skills',  'skills.sh')} />
-        <DeskIcon id="di-contact"  label="contact"   imgSrc={contactImg}  style={{ left: 16, top: 516 }} canvasRef={canvasRef} onClick={() => openFileWindow('contact', 'contact')} />
+        <DeskIcon id="di-skills"   label="skills.txt" imgSrc={skillsImg}   style={{ left: 16, top: 390 }} canvasRef={canvasRef} onClick={() => openFileWindow('skills',  'skills.txt')} />
+        <DeskIcon id="di-contact"  label="contact.txt" imgSrc={contactImg}  style={{ left: 16, top: 516 }} canvasRef={canvasRef} onClick={() => openFileWindow('contact', 'contact.txt')} />
         <DeskIcon id="di-fun"      label="fun stuff/" imgSrc={folder2Img} style={{ left: 16, top: 642 }} canvasRef={canvasRef} onClick={openFunStuffFolder} />
 
         {windows.map(w => {

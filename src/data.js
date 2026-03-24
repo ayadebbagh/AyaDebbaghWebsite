@@ -38,9 +38,9 @@ export const fileContents = {
 },
 
   skills: {
-    title: 'skills.sh',
+    title: 'skills.txt',
     html: `
-      <h3 style="font-family:'PPEditorialOld-Italic',cursive;color:#270722;font-size:22px;margin-bottom:5px;">✦ skills.sh</h3>
+      <h3 style="font-family:'PPEditorialOld-Italic',cursive;color:#270722;font-size:22px;margin-bottom:5px;">✦ skills.txt</h3>
       <div style="text-align:center;color:#D897B8;font-size:10px;letter-spacing:3px;padding:2px 0;margin:3px 0;">✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦</div>
       <p style="color:#270722;font-size:11px;">languages</p>
       <p style="color:#5A4858;margin-top:2px;font-size:11px;">Python · Java · JavaScript</p>
@@ -66,7 +66,7 @@ export const fileContents = {
   },
 
   contact: {
-    title: 'contact',
+    title: 'contact.txt',
     html: `
       <h3 style="font-family:'PPEditorialOld-Italic',cursive;color:#270722;font-size:22px;margin-bottom:5px;">✦ Reach Me</h3>
       <div style="text-align:center;color:#D897B8;font-size:10px;letter-spacing:3px;padding:2px 0;margin:3px 0;">✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦</div>
@@ -101,6 +101,7 @@ export const fileContents = {
       <h3 style="font-family:'PPEditorialOld-Italic',cursive;color:#270722;font-size:22px;margin-bottom:5px;">✦ CTF & Wargame Writeups</h3>
       <div style="text-align:center;color:#D897B8;font-size:10px;letter-spacing:3px;padding:2px 0;margin:3px 0;">✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦</div>
       <p style="font-size:11px;"><span style="color:#270722;">platforms</span>&nbsp; <span style="color:#7A9A50;">HackTheBox · PicoCTF · OverTheWire</span></p>
+      <p style="font-size:11px;margin-top:4px;"><span style="color:#270722;">repo</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="https://github.com/ayadebbagh/Write-ups" target="_blank" rel="noopener noreferrer" style="color:#63768D;text-decoration:underline;text-underline-offset:2px;">github.com/ayadebbagh/Write-ups</a></p>
       <p style="margin-top:8px;color:#5A4858;line-height:1.7;font-size:11px;">Solved challenge tracks and published technical, step-by-step writeups with clear methodology and reproducible commands.</p>
       <p style="color:#5A4858;line-height:1.7;font-size:11px;">Focused on privilege escalation, web exploitation, cryptography, and reverse engineering across multiple environments.</p>
       <p style="color:#5A4858;line-height:1.7;font-size:11px;">Used writeups to teach others and highlight structured cybersecurity problem-solving.</p>
@@ -122,7 +123,7 @@ export const fileContents = {
       <p style="font-size:11px;"><span style="color:#270722;">result</span>&nbsp; <span style="color:#7A9A50;">97% model accuracy</span></p>
       <p style="margin-top:8px;color:#5A4858;line-height:1.7;font-size:11px;">Built a diabetes prediction model and documented preprocessing, feature engineering, and evaluation decisions end-to-end.</p>
       <p style="color:#5A4858;line-height:1.7;font-size:11px;">Created visualizations to explain predictions and communicate findings to non-technical stakeholders.</p>
-      <p style="color:#5A4858;line-height:1.7;font-size:11px;">Kaggle link available in resume/portfolio links.</p>
+      <p style="font-size:11px;"><span style="color:#270722;">kaggle</span>&nbsp; <a href="https://www.kaggle.com/code/ayadebbagh/diabetes-prediction-project" target="_blank" rel="noopener noreferrer" style="color:#63768D;text-decoration:underline;text-underline-offset:2px;">kaggle.com/ayadebbagh/diabetes-prediction-project</a></p>
       <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:7px;">
         <span style="font-size:9px;padding:2px 7px;border:1px solid #D897B8;color:#270722;background:#F5EBF2;">Scikit-Learn</span>
         <span style="font-size:9px;padding:2px 7px;border:1px solid #D897B8;color:#270722;background:#F5EBF2;">Pandas</span>
@@ -138,6 +139,7 @@ export const fileContents = {
       <h3 style="font-family:'PPEditorialOld-Italic',cursive;color:#270722;font-size:22px;margin-bottom:5px;">✦ PromptShield: LLM Prompt Injection Firewall</h3>
       <div style="text-align:center;color:#D897B8;font-size:10px;letter-spacing:3px;padding:2px 0;margin:3px 0;">✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦ ─ ✦</div>
       <p style="font-size:11px;"><span style="color:#270722;">stack</span>&nbsp; <span style="color:#7A9A50;">Python · FastAPI · PyTorch · HuggingFace Transformers · DistilBERT · scikit-learn</span></p>
+      <p style="font-size:11px;margin-top:4px;"><span style="color:#270722;">repo</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="https://github.com/ayadebbagh/PromptShield" target="_blank" rel="noopener noreferrer" style="color:#63768D;text-decoration:underline;text-underline-offset:2px;">github.com/ayadebbagh/PromptShield</a></p>
       <p style="margin-top:8px;color:#5A4858;line-height:1.7;font-size:11px;">Built an ML-powered firewall that intercepts prompts before they reach an LLM and classifies injection, jailbreak, and PII-risk behavior.</p>
       <p style="color:#5A4858;line-height:1.7;font-size:11px;">Combined regex detection across 10+ attack categories with a fine-tuned DistilBERT model trained on ~5,800 labeled examples.</p>
       <p style="color:#5A4858;line-height:1.7;font-size:11px;">Implemented a policy engine returning allow/rewrite/redact/block outcomes with sub-50ms latency and validated via a 34-test end-to-end suite.</p>
@@ -215,11 +217,11 @@ export const fileContents = {
 // Add projects here — update ls[], files{}, dirs{} in each dir
 export const filesystem = {
   root: {
-    ls: ['about.txt', 'projects/', 'fun stuff/', 'skills.sh', 'contact'],
+    ls: ['about.txt', 'projects/', 'fun stuff/', 'skills.txt', 'contact.txt'],
     files: {
       'cat about.txt': { open: 'about' },
-      'cat skills.sh': { open: 'skills' },
-      'cat contact':   { open: 'contact' },
+      'cat skills.txt': { open: 'skills' },
+      'cat contact.txt':   { open: 'contact' },
     },
     dirs: {
       'cd projects/': 'projects',

@@ -80,7 +80,7 @@ const EGG_RESPONSES = {
     { type: 'resp',  text: 'total 42' },
     { type: 'resp',  text: '-rw-r--r--  aya  about.txt' },
     { type: 'resp',  text: 'drwxr-xr-x  aya  projects/' },
-    { type: 'resp',  text: '-rwxr-xr-x  aya  skills.sh' },
+    { type: 'resp',  text: '-rwxr-xr-x  aya  skills.txt' },
     { type: 'resp',  text: '-rw-r--r--  aya  .bash_history' },
     { type: 'resp',  text: '-rw-------  aya  .secret_notes' },
     { type: 'resp',  text: '-rwx------  aya  .flag  ← you found me 👀' },
@@ -156,8 +156,8 @@ export default function Terminal({ onOpenFile, onEggFound, onOpenFlags }) {
     { id: 4, type: 'prompt', text: '~/aya $ ls' },
     { id: 5, type: 'resp',   text: 'drwxr--r-- ✦  about.txt' },
     { id: 6, type: 'resp',   text: 'drwxr-xr-x ✦  projects/' },
-    { id: 7, type: 'resp',   text: '-rwxr--r-- ✦  skills.sh' },
-    { id: 8, type: 'resp',   text: '-rw-r--r-- ✦  contact' },
+    { id: 7, type: 'resp',   text: '-rwxr--r-- ✦  skills.txt' },
+    { id: 8, type: 'resp',   text: '-rw-r--r-- ✦  contact.txt' },
     { id: 9, type: 'spacer', text: '' },
   ]);
 
