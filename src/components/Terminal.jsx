@@ -83,7 +83,7 @@ const EGG_RESPONSES = {
     { type: 'resp',  text: '-rwxr-xr-x  aya  skills.txt' },
     { type: 'resp',  text: '-rw-r--r--  aya  .bash_history' },
     { type: 'resp',  text: '-rw-------  aya  .secret_notes' },
-    { type: 'resp',  text: '-rwx------  aya  .flag  ← you found me 👀' },
+    { type: 'resp',  text: '-rwx------  aya  .flag  ← you found me' },
   ],
   hack: [
     { type: 'resp',  text: '[░░░░░░░░░░] initializing breach...' },
@@ -107,7 +107,7 @@ const EGG_RESPONSES = {
     { type: 'muted', text: 'Nmap done: 1 IP address (1 host up)' },
   ],
   python: [
-    { type: 'resp',  text: 'Python 3.12.0 (aya build, pink edition)' },
+    { type: 'resp',  text: 'Python 3.12.0 (aya build)' },
     { type: 'resp',  text: '>>> import aya' },
     { type: 'resp',  text: '>>> aya.is_hireable()' },
     { type: 'star',  text: 'True' },
@@ -124,7 +124,7 @@ const EGG_RESPONSES = {
   uname: [
     { type: 'resp',  text: 'Linux aya-portfolio 6.6.0-pink #1337 SMP' },
     { type: 'resp',  text: 'x86_64 GNU/Linux' },
-    { type: 'muted', text: 'kernel built with love ♡ and too much caffeine' },
+    { type: 'muted', text: 'kernel built with love ♡' },
   ],
 };
 

@@ -428,7 +428,7 @@ export default function App() {
         <span>UTF-8</span>
         <span className="text-pink">✦ Aya Debbagh</span>
         <span className="ml-auto font-script text-[13px] text-pinklt">
-          security researcher. pink &amp; encrypted.
+          made with love.
         </span>
       </div>
 
