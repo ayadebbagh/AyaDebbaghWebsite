@@ -36,8 +36,9 @@ function useClock() {
 function useIconRows() {
   const compute = () => {
     const canvasH = window.innerHeight - 60;
-    const gap = Math.min(126, Math.max(90, Math.floor((canvasH - 12 - 110) / 4)));
-    return Array.from({ length: 5 }, (_, i) => 12 + i * gap);
+    const slot = Math.floor(canvasH / 5);
+    const offset = Math.max(8, Math.floor((slot - 100) / 2));
+    return Array.from({ length: 5 }, (_, i) => i * slot + offset);
   };
   const [rows, setRows] = useState(compute);
   useEffect(() => {
@@ -357,8 +358,8 @@ export default function App() {
       <div ref={canvasRef} className="relative flex-1 overflow-hidden z-10">
 
         <DeskIcon id="di-term"     label="terminal"   glyphText=">_"      style={{ left: 16,  top: iconRows[0] }} canvasRef={canvasRef} onClick={openTerminal} />
+        <DeskIcon id="di-fun"      label="fun stuff/" imgSrc={folder2Img}  style={{ left: 110, top: iconRows[0] }} canvasRef={canvasRef} onClick={openFunStuffFolder} />
         <DeskIcon id="di-about"    label="about.txt"  imgSrc={aboutImg}    style={{ left: 16,  top: iconRows[1] }} canvasRef={canvasRef} onClick={() => openFileWindow('about',   'about.txt')} />
-        <DeskIcon id="di-fun"      label="fun stuff/" imgSrc={folder2Img}  style={{ left: 110, top: iconRows[1] }} canvasRef={canvasRef} onClick={openFunStuffFolder} />
         <DeskIcon id="di-projects" label="projects/"  imgSrc={projectsImg} style={{ left: 16,  top: iconRows[2] }} canvasRef={canvasRef} onClick={openProjectsFolder} />
         <DeskIcon id="di-skills"   label="skills.txt" imgSrc={skillsImg}   style={{ left: 16,  top: iconRows[3] }} canvasRef={canvasRef} onClick={() => openFileWindow('skills',  'skills.txt')} />
         <DeskIcon id="di-contact"  label="contact.txt" imgSrc={contactImg} style={{ left: 16,  top: iconRows[4] }} canvasRef={canvasRef} onClick={() => openFileWindow('contact', 'contact.txt')} />
