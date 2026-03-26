@@ -13,6 +13,7 @@ import folder2Img  from './assets/folder2.png';
 import projectsImg from './assets/projects.png';
 import skillsImg   from './assets/skills.png';
 
+
 const STAR_CHARS = ['✦', '✧', '*', '⋆'];
 
 function useClock() {
@@ -30,6 +31,21 @@ function useClock() {
     return () => clearInterval(id);
   }, []);
   return time;
+}
+
+function useIconRows() {
+  const compute = () => {
+    const canvasH = window.innerHeight - 60;
+    const gap = Math.min(126, Math.max(90, Math.floor((canvasH - 12 - 110) / 4)));
+    return Array.from({ length: 5 }, (_, i) => 12 + i * gap);
+  };
+  const [rows, setRows] = useState(compute);
+  useEffect(() => {
+    const handler = () => setRows(compute());
+    window.addEventListener('resize', handler);
+    return () => window.removeEventListener('resize', handler);
+  }, []);
+  return rows;
 }
 
 let winZCounter = 30;
@@ -108,6 +124,7 @@ const FUN_STUFF_ITEMS = [
 
 export default function App() {
   const clock     = useClock();
+  const iconRows  = useIconRows();
   const canvasRef = useRef(null);
   const [isMobile, setIsMobile] = useState(() => isMobileViewport());
   const [showMobileNotice, setShowMobileNotice] = useState(true);
@@ -339,12 +356,12 @@ export default function App() {
 
       <div ref={canvasRef} className="relative flex-1 overflow-hidden z-10">
 
-        <DeskIcon id="di-term"     label="terminal"  glyphText=">_"      style={{ left: 16, top: 12  }} canvasRef={canvasRef} onClick={openTerminal} />
-        <DeskIcon id="di-about"    label="about.txt" imgSrc={aboutImg}    style={{ left: 16, top: 138 }} canvasRef={canvasRef} onClick={() => openFileWindow('about',   'about.txt')} />
-        <DeskIcon id="di-projects" label="projects/" imgSrc={projectsImg} style={{ left: 16, top: 264 }} canvasRef={canvasRef} onClick={openProjectsFolder} />
-        <DeskIcon id="di-skills"   label="skills.txt" imgSrc={skillsImg}   style={{ left: 16, top: 390 }} canvasRef={canvasRef} onClick={() => openFileWindow('skills',  'skills.txt')} />
-        <DeskIcon id="di-contact"  label="contact.txt" imgSrc={contactImg}  style={{ left: 16, top: 516 }} canvasRef={canvasRef} onClick={() => openFileWindow('contact', 'contact.txt')} />
-        <DeskIcon id="di-fun"      label="fun stuff/" imgSrc={folder2Img} style={{ left: 16, top: 642 }} canvasRef={canvasRef} onClick={openFunStuffFolder} />
+        <DeskIcon id="di-term"     label="terminal"   glyphText=">_"      style={{ left: 16,  top: iconRows[0] }} canvasRef={canvasRef} onClick={openTerminal} />
+        <DeskIcon id="di-about"    label="about.txt"  imgSrc={aboutImg}    style={{ left: 16,  top: iconRows[1] }} canvasRef={canvasRef} onClick={() => openFileWindow('about',   'about.txt')} />
+        <DeskIcon id="di-fun"      label="fun stuff/" imgSrc={folder2Img}  style={{ left: 110, top: iconRows[1] }} canvasRef={canvasRef} onClick={openFunStuffFolder} />
+        <DeskIcon id="di-projects" label="projects/"  imgSrc={projectsImg} style={{ left: 16,  top: iconRows[2] }} canvasRef={canvasRef} onClick={openProjectsFolder} />
+        <DeskIcon id="di-skills"   label="skills.txt" imgSrc={skillsImg}   style={{ left: 16,  top: iconRows[3] }} canvasRef={canvasRef} onClick={() => openFileWindow('skills',  'skills.txt')} />
+        <DeskIcon id="di-contact"  label="contact.txt" imgSrc={contactImg} style={{ left: 16,  top: iconRows[4] }} canvasRef={canvasRef} onClick={() => openFileWindow('contact', 'contact.txt')} />
 
         {windows.map(w => {
           if (!w.visible) return null;
