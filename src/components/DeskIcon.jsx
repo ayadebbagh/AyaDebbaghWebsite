@@ -67,10 +67,12 @@ export default function DeskIcon({ id, label, imgSrc, glyphText, style, onClick,
           />
         ) : (
           <div
-            className="border border-border bg-[#f0e8e4] flex items-center justify-center text-sm text-pink font-mono"
+            className="flex items-center justify-center"
             style={{ width: imgSize, height: imgSize }}
           >
-            {glyphText}
+            <div className="w-12 h-12 border border-border bg-[#f0e8e4] flex items-center justify-center text-sm text-pink font-mono">
+              {glyphText}
+            </div>
           </div>
         )}
       </div>
